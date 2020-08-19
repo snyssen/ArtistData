@@ -7,7 +7,9 @@ using System.Text;
 namespace ArtistData
 {
    public class ArtistContext: DbContext
+       
     {
+        
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Release> Releases { get; set; }
 
