@@ -9,6 +9,7 @@ namespace ArtistData
    public class ArtistContext: DbContext
     {
         public DbSet<Artist> Artists { get; set; }
+        public DbSet<Release> Releases { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
