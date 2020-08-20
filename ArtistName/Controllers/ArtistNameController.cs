@@ -10,7 +10,8 @@ using Microsoft.Extensions.Logging;
 
 namespace ArtistName.Controllers
 {
-    
+
+    [Authorize]
     [ApiController]
     [ApiExplorerSettings(GroupName = "artistnames")]
     [Produces("application/json")]
