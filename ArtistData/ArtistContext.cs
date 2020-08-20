@@ -10,6 +10,7 @@ namespace ArtistData
        
     {
         
+
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Release> Releases { get; set; }
 
