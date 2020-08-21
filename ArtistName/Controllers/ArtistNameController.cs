@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ArtistName.TranfersEt_Helper;
+using ArtistName.DTO;
+using ArtistName.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,6 @@ using Microsoft.Extensions.Logging;
 namespace ArtistName.Controllers
 {
 
-    [Authorize]
     [ApiController]
     [ApiExplorerSettings(GroupName = "artistnames")]
     [Produces("application/json")]
@@ -31,7 +31,7 @@ namespace ArtistName.Controllers
         [HttpGet("{artistName}", Name = "GetArtistNameAsync")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ArtistName>> GetArtistNameAsync([FromRoute] string artistname)
+        public async Task<ActionResult<ArtistNameDto>> GetArtistNameAsync([FromRoute] string artistname)
         {
             var artist = await _artistnameService.GetArtistNameAsync(artistname);
             if (artist == null) return NotFound("Couldn't find any associated ArtistName");
