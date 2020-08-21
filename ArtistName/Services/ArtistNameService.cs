@@ -1,12 +1,13 @@
-﻿using ArtistData;
+﻿using Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ArtistName.Services.Interfaces;
+using ArtistName.DTO;
 
-namespace ArtistName.TranfersEt_Helper
+namespace ArtistName.Services
 {
     public class ArtistNameService : IArtistNameService
     {
@@ -19,20 +20,10 @@ namespace ArtistName.TranfersEt_Helper
             _logger = logger;
         }
 
-        public async Task<ArtistName> GetArtistNameAsync(string name)
+        public async Task<ArtistNameDto> GetArtistNameAsync(string name)
         {
             var artist = await _paraContext.Artists
-                .AsNoTracking()
-                .Include(a => a.Id)
-                .Include(a => a.Name)
-                .Include(a => a.Sort_name)
-                .Include(a => a.Gid)
-                .Include(a => a.Type)
-                .Include(a => a.Gender)
-                .Include(a => a.Comment)
-                .Include(a => a.Last_updated)
-                .ThenInclude(at => at.HasValue)
-                .Select(a => new ArtistName
+                .Select(a => new ArtistNameDto
                 {
                     Id = a.Id,
                     Name = a.Name,

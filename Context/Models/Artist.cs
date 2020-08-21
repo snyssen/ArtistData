@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ArtistData.Models
+namespace Context.Models
 {
     public class Artist
     {
