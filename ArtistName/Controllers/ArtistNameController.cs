@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using ArtistName.DTO;
+using ArtistName.Services;
 using ArtistName.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -19,6 +21,7 @@ namespace ArtistName.Controllers
     public class ArtistNameController : ControllerBase
     {
         private readonly IArtistNameService _artistnameService;
+        
 
         public ArtistNameController(IArtistNameService artistnameService)
         {
@@ -28,14 +31,21 @@ namespace ArtistName.Controllers
 
         
         [AllowAnonymous]
-        [HttpGet("{artistName}", Name = "GetArtistNameAsync")]
+        [HttpGet("search", Name = "GetArtistNameAsync")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ArtistNameDto>> GetArtistNameAsync([FromRoute] string artistname)
+        public async Task<ActionResult<ArtistNameDto>> GetArtistNameAsync([FromQuery] string search)
         {
-            var artist = await _artistnameService.GetArtistNameAsync(artistname);
-            if (artist == null) return NotFound("Couldn't find any associated ArtistName");
-            return Ok(artist);
+                string searchDecoded = HttpUtility.UrlDecode(search);
+                string[] artists = searchDecoded.Split(",");
+            List<ArtistNameDto> results = new List<ArtistNameDto>();
+            foreach (string item in artists)
+            {
+                var result =  await _artistnameService.GetArtistNameAsync(item);
+                results.Add(result);
+            }
+            return Ok(results);
+
         }
 
     }

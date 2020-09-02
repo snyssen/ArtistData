@@ -9,6 +9,7 @@ namespace Context
        
     {
         
+
         public ArtistContext(DbContextOptions<ArtistContext> options)
             : base(options)
         {

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ArtistName.Services.Interfaces;
 using ArtistName.DTO;
+using System.Collections.Generic;
 
 namespace ArtistName.Services
 {
@@ -38,7 +39,7 @@ namespace ArtistName.Services
 
             _logger.LogInformation("TEST TEST TEST TEST TEST TEST TEST");
 
-            
+
             return artist;
         }
     }
