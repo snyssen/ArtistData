@@ -11,7 +11,7 @@ namespace ArtistData
         static void Main(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ArtistContext>()
-                .UseSqlServer("Server=.;Database=MusicBrainz;User Id=CasterStatsApp;Password=Test123=;");
+                .UseSqlServer(@"Server=DESKTOP-5A54U6A;Database=ArtistContext;Trusted_Connection=True;MultipleActiveResultSets=true");
             using (var context = new ArtistContext(optionsBuilder.Options))
             {
                 Console.WriteLine("Starting parsing of artists...");
@@ -88,6 +88,7 @@ namespace ArtistData
                     Console.WriteLine(e);
                     return;
                 }
+
 
 
                 Console.WriteLine("Starting parsing of releases...");
